@@ -9,7 +9,7 @@ else
 	CXXFLAGS += -std=gnu++98
 endif
 
-SRCS := main.cpp
+SRCS := Fixed.cpp main.cpp
 
 OBJS_DIR := objects
 OBJS := $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
