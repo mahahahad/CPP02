@@ -1,8 +1,8 @@
 #include "Fixed.hpp"
-#include <cmath>
 
 Fixed::Fixed() {
-	cout << "Default constructor called" << endl;
+    value = 0;
+    cout << "Default constructor called" << endl;
 }
 
 Fixed::Fixed(const int val) {
@@ -16,38 +16,67 @@ Fixed::Fixed(const float val) {
 }
 
 Fixed::Fixed(const Fixed &copy) {
-	cout << "Copy constructor called" << endl;
+    cout << "Copy constructor called" << endl;
     value = copy.getRawBits();
 }
 
 Fixed::~Fixed() {
-	cout << "Destructor called" << endl;
+    cout << "Destructor called" << endl;
 }
 
-Fixed &Fixed::operator=(const Fixed& t) {
-	cout << "Copy assignment operator called" << endl;
-	value = t.getRawBits();
-	return (*this);
+Fixed&  Fixed::operator=(const Fixed& t) {
+    cout << "Copy assignment operator called" << endl;
+    value = t.getRawBits();
+    return (*this);
 }
 
+/**
+ * @brief Convert the Fixed point number to a floating point number
+ * 
+ * @return float The converted floating point number, with `fractionalBits` amount of precision
+ */
 float   Fixed::toFloat(void) const {
     return ((float) value / (float) (1 << fractionalBits));
 }
 
+/**
+ * @brief Convert the Fixed point number to an integer
+ * 
+ * @return int The converted integer, rounded up
+ */
 int     Fixed::toInt(void) const {
     return (roundf((*this).toFloat()));
 }
 
-int		Fixed::getRawBits(void) const {
-	cout << "getRawBits member function called" << endl;
-	return (value);
+/**
+ * @brief Get the raw value of the Fixed point number
+ * 
+ * @return int The integer representation of the Fixed point number
+ */
+int     Fixed::getRawBits(void) const {
+    cout << "getRawBits member function called" << endl;
+    return (value);
 }
 
-void	Fixed::setRawBits(int const raw) {
+/**
+ * @brief Manually change the raw value of the Fixed point number
+ * 
+ * @param raw The new value to overwrite with
+ */
+void    Fixed::setRawBits(int const raw) {
     value = raw;
-	cout << "setRawBits member function called" << endl;
+    cout << "setRawBits member function called" << endl;
 }
 
-std::ostream&   operator<<(std::ostream& output, const Fixed& val) {
-    return (output << val.toFloat());
+/**
+ * @brief Stream insertion overload
+ * 
+ * Allows users to simply insert a Fixed point number like the other number types into the provided stream
+ * 
+ * @param output The stream to insert into 
+ * @param fixedNum The Fixed point number to insert 
+ * @return std::ostream&
+ */
+std::ostream&   operator<<(std::ostream& output, const Fixed& fixedNum) {
+    return (output << fixedNum.toFloat());
 }
