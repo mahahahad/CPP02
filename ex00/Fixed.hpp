@@ -10,7 +10,7 @@ using std::endl;
 class Fixed {
 	public:
 		Fixed();
-		Fixed( Fixed &copy );
+		Fixed( const Fixed &copy );
 		Fixed	&operator=(const Fixed& x);
 		~Fixed();
 		int		getRawBits( void ) const;
