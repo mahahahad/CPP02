@@ -1,16 +1,7 @@
 CXX := c++
-CXXFLAGS := -Wall -Werror -Wextra
-OS := $(shell uname)
-
-# Include the appropriate compiler version of C++98
-ifeq ($(OS), Linux)
-	CXXFLAGS += -std=c++98
-else
-	CXXFLAGS += -std=gnu++98
-endif
+CXXFLAGS := -Wall -Werror -Wextra -std=c++98
 
 SRCS := Fixed.cpp main.cpp
-
 OBJS_DIR := objects
 OBJS := $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
